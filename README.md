@@ -18,6 +18,7 @@ Data: [`./persona.csv`](./persona.csv)
 A bio is a ChatGPT-generated personality summary. User message given to ChatGPT is as follows, no system message was given:
 
 ```python
+# https://github.com/Oaklight/persona-guessing/blob/e23aa33a3e713619120ea443af88799c17f03ad9/src/bio.py#L9
 prompt = f'Please write a bio for the character {charName} from TV series "{showName}" in one paragraph'
 ```
 
@@ -30,6 +31,7 @@ A scene is of the same definition of the TVSG paper.
 Each scene script is length-limited at **2500 words**, then passed to ChatGPT with **100** heuristic summary length and the following system message and user message:
 
 ```python
+# https://github.com/Oaklight/persona-guessing/blob/e23aa33a3e713619120ea443af88799c17f03ad9/src/plotsumm.py#L52
 message = f"You are good at plot briefing. You will be present with a long plot script. Please summarize the given plot with less than {heuristic_len} words."
 
 prompt = f"{long_plot}\\nPlease summarize it with less than {heuristic_len} words:"
@@ -54,6 +56,7 @@ Data: [`./memory_files/*`](./memory_files)
 For every primary characters speaking in a scene script at "scene_id", the scene script was length-limited at **2500 words** then passed to ChatGPT for 1st-person-perspective personal memory, with the following system message and user message:
 
 ```python
+# https://github.com/Oaklight/persona-guessing/blob/e23aa33a3e713619120ea443af88799c17f03ad9/src/memory.py#L95
 message = f"You are playing a imitation game, where you are a specific person and try to concisely reiterate a conversation"
 
 prompt = f"Given a conversation:\n\n{scene_script}\n\nNow, speak as you are {who}, describing in first-person perspective of what you experienced, with no more than {heuristic_len} words."
@@ -99,6 +102,7 @@ Data: [`./memory_summ_files/*`](./memory_summ_files)
 During the experiment, we proposed to use multiple pieces of memory to guess the TV show. To this end, we first form `mega_memory` of at most **20 previous scenes**, where the character of interest (`who`) is one of the primary characters in the scene. Then, we pass the mega memory, length-limited at **2500 words**, to ChatGPT for memory summary. The following system message and user message are used:
 
 ```python
+# https://github.com/Oaklight/persona-guessing/blob/e23aa33a3e713619120ea443af88799c17f03ad9/src/memory.py#L281
 message = f"You are good at memory briefing. You will be present with a recent memory from someone. Please summarize the given memory with less than {heuristic_len} words, in the first-person perspective."
 
 prompt = f"[{who}]: {long_memory}\nPlease summarize it with less than {heuristic_len} words:"
