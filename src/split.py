@@ -3,6 +3,8 @@ import os
 
 origin_dir = "./merge_split_ready/merged"
 tgt_dir = "./merge_split_ready/splitted"
+os.makedirs(origin_dir, exist_ok=True)
+os.makedirs(tgt_dir, exist_ok=True)
 
 show_seq = ("FRIENDS", "The_Big_Bang_Theory", "Frasier", "Gilmore_Girls", "The_Office")
 test_season_dict = {

@@ -8,6 +8,8 @@ import os
 
 origin_dir = "./tvsg_original/merged"
 tgt_dir = "./merge_split_ready/merged"
+os.makedirs(tgt_dir, exist_ok=True)
+
 plot_summ_dir = "./plot_summ_files"
 heuristic_len = 100
 
