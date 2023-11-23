@@ -138,3 +138,25 @@ The following is an example of memory summary:
         "summ_memory": "I helped Stuart take care of Mrs. Wolowitz, but felt weird about their close relationship. Raj and I got into a mix-up with the car ride, leading to an argument with Stuart. Sheldon brought up an interesting topic about gorillas and supersoldiers. There was tension between Penny and Bernadette about studying for a new job. Sheldon didn't enjoy teaching a class, but I tried convincing him to let me join. We ended up arguing, and I accidentally hit him with a spitball. Despite the conflict, we quizzed each other and he kept up."
     },
 ```
+
+## merge_split_ready
+
+for ease of training supervised models using our summary data and previous scene data (just the previous scene entry), we processed them into merged files and created split files for train, dev, test.
+
+```python
+test_season_dict = {
+    "FRIENDS": 9,
+    "The_Big_Bang_Theory": 8,
+    "Frasier": 10,
+    "Gilmore_Girls": 5,
+    "The_Office": 8,
+}
+```
+For each show `show_name`, any scene before `test_season_dict[show_name]` is considered as **train** sample. <br>
+The **first half** of test season scenes are used as **test** set, **second half** of them are used as **dev** set.
+
+### how to create
+1. unzip `./tvsg_original/merged.zip` into `./tvsg_original/merged`
+2. cd to project root dir
+3. `python src/merge.py`
+4. `python src/split.py`
